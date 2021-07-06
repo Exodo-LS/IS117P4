@@ -34,210 +34,209 @@
             background-size: cover;
         }
     </style>
-    <script type = "text/javascript">
-        $(document).ready( function() {
-            $("#btn").click( function() {
-                var zip = $("#zip").val();
-                var cc = $("#cc").val();
-                var choice = ' ';
-                var radios = document.getElementsByName('ws');
-                for (var i = 0, length = radios.length; i < length; i++) {
-                    if (radios[i].checked) {
-                        choice = (radios[i].value);
-                        alert(choice);
-                        break;
-                    }
-                }
-                if (zip != '' && cc != '') {
-                    $.ajax( {
-                        type:  "GET",
-                        url:   "weather_app.php",
-                        data:  {"zip" : zip , "cc" : cc , "choice" : choice },
-                        beforeSend: function()
-                        {
-                            $(".wheel").html
-                            (`
-						<style>
-						.wheel
-						{
-							border: 20px solid #ebb134;
-							width:  100px;
-							height: 100px;
-							border-top: 20px solid green;
-							background-color: red ;
-							overflow:hidden;
-							border-radius: 50%;
-							animation: AAA 2s linear infinite;
-						}
-						@keyframes AAA
-						{
-							0%   { transform: rotate(0deg)  ; }
-							100% { transform: rotate(360deg); }
-						}
-						</style>
-					`);
-                            $(".report").html("");
-                            $("#B").html("");
-                        },
-                        error:      function(xhr, status, error)
-                        {
-                            alert( "Error Message \r\nNumeric code is: " + xhr.status + " \r\nError is " + error);
-                            $("#B").html("Invalid Response");
-                            $(".wheel").html
-                            (`
-                            <style>
-                            </style>
-                        `);
-                        },
-                        success:    function(result)
-                        {
-                            $(".wheel").html
-                            (`
-                            <style>
-                            </style>
-                   `);
-                            r = JSON.parse(result);
-                            if (choice === 'wb')
-                            {
-                                res =   "City: "           + r.data[0].city_name                    + " "         + /*name property */
-                                    "<br>Latitude: "       + r.data[0].lat               + "&deg"         + /*latiude property*/
-                                    "<br>Longitude: "      + r.data[0].lon               + "&deg"         + /*latiude property*/
-                                    "<br>Temperature: "    + r.data[0].temp               + "&deg;C "   + /*main's temperature property *
-						"<br>Description: "    + r.data[0].weather.description    + " "         + /*weather's description property*/
-                                    "<br>Wind Speed: "     + r.data[0].wind_spd             + "m/s"       + /*wind speed property*/
-                                    "<br>Sunrise/Epoch: "  + r.data[0].sunrise           + " "         +
-                                    "<br>";
-                            }
-                            else
-                            {
-                                res = "City: "           + r.name                    + " "         + /*name property */
-                                    "<br>Country: "       + r.sys.country               + " "         + /*Country property*/
-                                    "<br>Latitude: "       + r.coord.lat               + "&deg"         + /*latiude property*/
-                                    "<br>Longitude: "      + r.coord.lon               + "&deg"         + /*latiude property*/
-                                    "<br>Temperature: "    + r.main.temp               + "&deg;C "   + /*main's temperature property */
-                                    "<br>Weather: "        + r.weather[0].main         + " "         + /*weather's main property */
-                                    "<br>Description: "    + r.weather[0].description  + " "         + /*weather's description property*/
-                                    "<br>Humidity: "       + r.main.humidity           + "%"         + /*humidity property*/
-                                    "<br>Wind Speed: "     + r.wind.speed              + "m/s"       + /*wind speed property*/
-                                    "<br>Sunrise/Epoch: "  + new Date(r.sys.sunrise * 1000).toLocaleString(); + " " + "<br>";
-                            }
-                            $("#B").html(res);
-                        }
-                    });
-                };
-            });
-            var ptrLocation = document.getElementById("location");
-            var ptrPress    = document.getElementById("press");
-            ptrPress.addEventListener( "click", G )
-            var lat = "";
-            var lon = "";
-            function G()
-            {
-                if (navigator.geolocation)
-                {
-                    navigator.geolocation.getCurrentPosition(F);
-                }
-                else
-                {
-                    ptrLocation.innerHTML = "Geolocation not supported by this browser.";
-                }
-            }
-            function F(position)
-            {
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
-                var choice = ' ';
-                var radios = document.getElementsByName('ws');
-                //alert(radios);
-                for (var i = 0, length = radios.length; i < length; i++) {
-                    if (radios[i].checked) {
-                        choice = (radios[i].value);
-                        alert(choice);
-                        break;
-                    }
-                }
-                if (lat != '' && lon != '')
-                {
-                    $.ajax( {
-                        type:  "GET",
-                        url:   "weather_app.php",
-                        data:  {"lat" : lat , "lon" : lon , "choice" : choice},
-                        beforeSend: function()
-                        {
-                            $(".wheel").html
-                            (`
-						<style>
-						.wheel
-						{
-							border: 20px solid #ebb134;
-							width:  100px;
-							height: 100px;
-							border-top: 20px solid green;
-							background-color: red ;
-							overflow:hidden;
-							border-radius: 50%;
-							animation: AAA 2s linear infinite;
-						}
-						@keyframes AAA
-						{
-							0%   { transform: rotate(0deg)  ; }
-							100% { transform: rotate(360deg); }
-						}
-						</style>
-					`);
-                            $(".report").html("");
-                        },
-                        error:      function(xhr, status, error)
-                        {
-                            alert( "Error Message \r\nNumeric code is: " + xhr.status + " \r\nError is " + error);
-                            $("#B").html("Invalid Response");
-                            $(".wheel").html
-                            (`
-                            <style>
-                            </style>
-                        `);
-                        },
-                        success:    function(result)
-                        {
-                            $(".wheel").html
-                            (`
-                            <style>
-                            </style>
-                   `);
-                            r = JSON.parse(result);
-                            if (choice === 'wb')
-                            {
-                                res =   "City: "           + r.data[0].city_name                    + " "         + /*name property */
-                                    "<br>Latitude: "       + r.data[0].lat               + "&deg"         + /*latiude property*/
-                                    "<br>Longitude: "      + r.data[0].lon               + "&deg"         + /*latiude property*/
-                                    "<br>Temperature: "    + r.data[0].temp               + "&deg;C "   + /*main's temperature property *
-						"<br>Description: "    + r.data[0].weather.description    + " "         + /*weather's description property*/
-                                    "<br>Wind Speed: "     + r.data[0].wind_spd             + "m/s"       + /*wind speed property*/
-                                    "<br>Sunrise/Epoch: "  + r.data[0].sunrise           + " "         +
-                                    "<br>";
-                            }
-                            else
-                            {
-                                res = "City: "           + r.name                    + " "         + /*name property */
-                                    "<br>Country: "       + r.sys.country               + " "         + /*Country property*/
-                                    "<br>Latitude: "       + r.coord.lat               + "&deg"         + /*latiude property*/
-                                    "<br>Longitude: "      + r.coord.lon               + "&deg"         + /*latiude property*/
-                                    "<br>Temperature: "    + r.main.temp               + "&deg;C "   + /*main's temperature property */
-                                    "<br>Weather: "        + r.weather[0].main         + " "         + /*weather's main property */
-                                    "<br>Description: "    + r.weather[0].description  + " "         + /*weather's description property*/
-                                    "<br>Humidity: "       + r.main.humidity           + "%"         + /*humidity property*/
-                                    "<br>Wind Speed: "     + r.wind.speed              + "m/s"       + /*wind speed property*/
-                                    "<br>Sunrise/Epoch: "  + new Date(r.sys.sunrise * 1000).toLocaleString(); +" "+ "<br>";
-                            }
-                            $("#B").html(res);
-                        }
-                    });
-                };
-            }
-        });
-    </script>
 </head>
-
+<script type = "text/javascript">
+    $(document).ready( function() {
+        $("#btn").click( function() {
+            var zip = $("#zip").val();
+            var cc = $("#cc").val();
+            var choice = ' ';
+            var radios = document.getElementsByName('ws');
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    choice = (radios[i].value);
+                    alert(choice);
+                    break;
+                }
+            }
+            if (zip != '' && cc != '') {
+                $.ajax( {
+                    type:  "GET",
+                    url:   "weather_app.php",
+                    data:  {"zip" : zip , "cc" : cc , "choice" : choice },
+                    beforeSend: function()
+                    {
+                        $(".wheel").html
+                        (`
+						<style>
+						.wheel
+						{
+							border: 20px solid #ebb134;
+							width:  100px;
+							height: 100px;
+							border-top: 20px solid green;
+							background-color: red ;
+							overflow:hidden;
+							border-radius: 50%;
+							animation: AAA 2s linear infinite;
+						}
+						@keyframes AAA
+						{
+							0%   { transform: rotate(0deg)  ; }
+							100% { transform: rotate(360deg); }
+						}
+						</style>
+					`);
+                        $(".report").html("");
+                        $("#B").html("");
+                    },
+                    error:      function(xhr, status, error)
+                    {
+                        alert( "Error Message \r\nNumeric code is: " + xhr.status + " \r\nError is " + error);
+                        $("#B").html("Invalid Response");
+                        $(".wheel").html
+                        (`
+                            <style>
+                            </style>
+                        `);
+                    },
+                    success:    function(result)
+                    {
+                        $(".wheel").html
+                        (`
+                            <style>
+                            </style>
+                   `);
+                        r = JSON.parse(result);
+                        if (choice === 'wb')
+                        {
+                            res =   "City: "           + r.data[0].city_name                    + " "         + /*name property */
+                                "<br>Latitude: "       + r.data[0].lat               + "&deg"         + /*latiude property*/
+                                "<br>Longitude: "      + r.data[0].lon               + "&deg"         + /*latiude property*/
+                                "<br>Temperature: "    + r.data[0].temp               + "&deg;C "   + /*main's temperature property *
+						"<br>Description: "    + r.data[0].weather.description    + " "         + /*weather's description property*/
+                                "<br>Wind Speed: "     + r.data[0].wind_spd             + "m/s"       + /*wind speed property*/
+                                "<br>Sunrise/Epoch: "  + r.data[0].sunrise           + " "         +
+                                "<br>";
+                        }
+                        else
+                        {
+                            res = "City: "           + r.name                    + " "         + /*name property */
+                                "<br>Country: "       + r.sys.country               + " "         + /*Country property*/
+                                "<br>Latitude: "       + r.coord.lat               + "&deg"         + /*latiude property*/
+                                "<br>Longitude: "      + r.coord.lon               + "&deg"         + /*latiude property*/
+                                "<br>Temperature: "    + r.main.temp               + "&deg;C "   + /*main's temperature property */
+                                "<br>Weather: "        + r.weather[0].main         + " "         + /*weather's main property */
+                                "<br>Description: "    + r.weather[0].description  + " "         + /*weather's description property*/
+                                "<br>Humidity: "       + r.main.humidity           + "%"         + /*humidity property*/
+                                "<br>Wind Speed: "     + r.wind.speed              + "m/s"       + /*wind speed property*/
+                                "<br>Sunrise/Epoch: "  + new Date(r.sys.sunrise * 1000).toLocaleString(); + " " + "<br>";
+                        }
+                        $("#B").html(res);
+                    }
+                });
+            };
+        });
+        var ptrLocation = document.getElementById("location");
+        var ptrPress    = document.getElementById("press");
+        ptrPress.addEventListener( "click", G )
+        var lat = "";
+        var lon = "";
+        function G()
+        {
+            if (navigator.geolocation)
+            {
+                navigator.geolocation.getCurrentPosition(F);
+            }
+            else
+            {
+                ptrLocation.innerHTML = "Geolocation not supported by this browser.";
+            }
+        }
+        function F(position)
+        {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var choice = ' ';
+            var radios = document.getElementsByName('ws');
+            //alert(radios);
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    choice = (radios[i].value);
+                    alert(choice);
+                    break;
+                }
+            }
+            if (lat != '' && lon != '')
+            {
+                $.ajax( {
+                    type:  "GET",
+                    url:   "weather_app.php",
+                    data:  {"lat" : lat , "lon" : lon , "choice" : choice},
+                    beforeSend: function()
+                    {
+                        $(".wheel").html
+                        (`
+						<style>
+						.wheel
+						{
+							border: 20px solid #ebb134;
+							width:  100px;
+							height: 100px;
+							border-top: 20px solid green;
+							background-color: red ;
+							overflow:hidden;
+							border-radius: 50%;
+							animation: AAA 2s linear infinite;
+						}
+						@keyframes AAA
+						{
+							0%   { transform: rotate(0deg)  ; }
+							100% { transform: rotate(360deg); }
+						}
+						</style>
+					`);
+                        $(".report").html("");
+                    },
+                    error:      function(xhr, status, error)
+                    {
+                        alert( "Error Message \r\nNumeric code is: " + xhr.status + " \r\nError is " + error);
+                        $("#B").html("Invalid Response");
+                        $(".wheel").html
+                        (`
+                            <style>
+                            </style>
+                        `);
+                    },
+                    success:    function(result)
+                    {
+                        $(".wheel").html
+                        (`
+                            <style>
+                            </style>
+                   `);
+                        r = JSON.parse(result);
+                        if (choice === 'wb')
+                        {
+                            res =   "City: "           + r.data[0].city_name                    + " "         + /*name property */
+                                "<br>Latitude: "       + r.data[0].lat               + "&deg"         + /*latiude property*/
+                                "<br>Longitude: "      + r.data[0].lon               + "&deg"         + /*latiude property*/
+                                "<br>Temperature: "    + r.data[0].temp               + "&deg;C "   + /*main's temperature property *
+						"<br>Description: "    + r.data[0].weather.description    + " "         + /*weather's description property*/
+                                "<br>Wind Speed: "     + r.data[0].wind_spd             + "m/s"       + /*wind speed property*/
+                                "<br>Sunrise/Epoch: "  + r.data[0].sunrise           + " "         +
+                                "<br>";
+                        }
+                        else
+                        {
+                            res = "City: "           + r.name                    + " "         + /*name property */
+                                "<br>Country: "       + r.sys.country               + " "         + /*Country property*/
+                                "<br>Latitude: "       + r.coord.lat               + "&deg"         + /*latiude property*/
+                                "<br>Longitude: "      + r.coord.lon               + "&deg"         + /*latiude property*/
+                                "<br>Temperature: "    + r.main.temp               + "&deg;C "   + /*main's temperature property */
+                                "<br>Weather: "        + r.weather[0].main         + " "         + /*weather's main property */
+                                "<br>Description: "    + r.weather[0].description  + " "         + /*weather's description property*/
+                                "<br>Humidity: "       + r.main.humidity           + "%"         + /*humidity property*/
+                                "<br>Wind Speed: "     + r.wind.speed              + "m/s"       + /*wind speed property*/
+                                "<br>Sunrise/Epoch: "  + new Date(r.sys.sunrise * 1000).toLocaleString(); +" "+ "<br>";
+                        }
+                        $("#B").html(res);
+                    }
+                });
+            };
+        }
+    });
+</script>
 <body>
 <div id = cluster>
     <h2 align = center>Assignment 3: Weather Simulation</h2>
