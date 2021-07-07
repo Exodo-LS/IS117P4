@@ -8,27 +8,29 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 100%;
 	max-width: 960px;
+	width: 99%;
 }
 
 .main_container {
 	margin-left: 25%;
 	margin-right: 50%;
-	width: 99%;
+	width: 100%;
 	text-align: center;
 	border: solid 3px #931420;
 	background-color: #fffded;
+	clear: left;
 }
 
 footer {
 	background-color: #931420;
 	padding-top: 1em;
 	padding-bottom: 1em;
+	clear: left;
 }
 
 footer div span {
 	text-align: center !important;
 	color: #fffded !important;
-
 }
 
 
