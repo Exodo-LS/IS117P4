@@ -7,10 +7,11 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
-    <link href="demo.css" rel="stylesheet">
-    <link href="..styles/normalize.css" rel="stylesheet">
+    <link href="../styles/pages.css" rel="stylesheet">
+    <link href="../styles/normalize.css" rel="stylesheet">
 </head>
 <body>
+<div class="contain">
     <div class="container-fluid">
     <nav class="navbar navbar-expand-md
                         justify-content-start
@@ -49,44 +50,40 @@
     </nav>
 </div>
     <main>
-        <div class="contact">
-            <div id="fname">
-                <h2>Mohammad-Shamel</h2>
-            </div>
-            <div id="lname">
-                <h2>Agha</h2>
-            </div>
-            <div id="picture">
+        <table class="contact">
+            <tbody>
+                <tr>
+                    <td>Mohammad-Shamel</td>
+                    <td>973-567-1971
+                        <br>
+                        Not My actual phone number
+                    </td>
+                    <td><a href="https://www.linkedin.com/in/mohammad-shamel-agha-67ab801a1/">My LinkedIn Page</a></td>
 
-            </div>
-            <div id="phone">
-                <h2>973-565-1791</h2>
-                <h4>Not my actual phone number</h4>
-            </div>
-            <div id="em1">
-                <h2></h2>
-            </div>
-            <div id="em2">
-                <h2></h2>
-            </div>
-            <div id="link">
-                <h2><a href="#">My LinkedIn Page</a></h2>
-            </div>
-            <div id="monster">
-                <h2><a href="#">My Monster Page</a></h2>
-            </div>
-        </div>
+                </tr>
+                <tr>
+                    <td>Agha</td>
+                    <td><a href="mailto:dummyt170@gmail.com">Personal Email</a></td>
+                    <td><a href="https://www.monster.com/profile/detail">Monster Page</a></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/Mo.png" alt="Me"></td>
+                    <td><a href="mailto:dummyt170@gmail.com">Business Email</a></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </main>
     <div>
     <footer class="footer page-footer font-small ">
         <div class="container">
             <div class="row">
-                <span class="text-muted">&copy; Mohammad-Shamel Agha, 2021 |  Terms Of Use  |  Privacy Statement</span>
+                <span>&copy; Mohammad-Shamel Agha, 2021 |  Terms Of Use  |  Privacy Statement</span>
             </div>
         </div>
     </footer>
+    </div>
 </div>
-
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
