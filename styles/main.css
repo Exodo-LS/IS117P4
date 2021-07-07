@@ -16,13 +16,13 @@ body {
 	margin-right: 50%;
 	width: 100%;
 	text-align: center;
-	border: solid 3px #931420;
-	background-color: #fffded;
+	border: solid 3px black;
+	background-color: #82cef1;
 	clear: left;
 }
 
 footer {
-	background-color: #931420;
+	background-color: black;
 	padding-top: 1em;
 	padding-bottom: 1em;
 	clear: left;
