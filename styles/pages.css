@@ -53,7 +53,18 @@ body {
 
 }
 
+.skill {
+    border: solid 3px darkgrey;
+    background-color: lightcoral;
+    width: 100%;
+    clear: left;
+}
 
+.skill div.resume {
+    column-count: 2;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+}
 main table.contact {
     text-align: center;
     font-size: 120%;
